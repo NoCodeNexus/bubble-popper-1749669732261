@@ -1,0 +1,117 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stress Relief Game - Bubble Popper</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #8BC6EC, #9599E2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            color: #333;
+        }
+
+        #game-container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 80%;
+            max-width: 600px;
+        }
+
+        h2 {
+            color: #555;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        #bubble-container {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            margin: 20px auto;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            background-color: rgba(79, 157, 255, 0.7);
+            cursor: pointer;
+            animation: float 4s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(-20px);
+            }
+        }
+
+        #message {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #28a745;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="game-container">
+        <section id="bubble-popper">
+            <h2>Bubble Popper</h2>
+            <div id="bubble-container"></div>
+            <div id="message">Pop the bubbles!</div>
+        </section>
+    </div>
+
+    <script>
+        // Bubble Popper
+        const bubbleContainer = document.getElementById('bubble-container');
+        const message = document.getElementById('message');
+
+        function createBubble() {
+            const bubble = document.createElement('div');
+            bubble.classList.add('bubble');
+            const size = Math.random() * 50 + 20;
+            bubble.style.width = size + 'px';
+            bubble.style.height = size + 'px';
+            bubble.style.left = Math.random() * (bubbleContainer.offsetWidth - size) + 'px';
+            bubble.style.bottom = '0px';
+            bubble.style.animationDuration = Math.random() * 3 + 2 + 's';
+            bubbleContainer.appendChild(bubble);
+
+            bubble.addEventListener('click', function() {
+                bubble.remove();
+                message.textContent = 'Good job!';
+                setTimeout(() => {
+                    message.textContent = 'Pop the bubbles!';
+                }, 1000);
+            });
+
+            bubble.addEventListener('animationend', () => {
+                bubble.remove();
+            });
+        }
+
+        setInterval(createBubble, 1000);
+    </script>
+</body>
+</html>
+```
